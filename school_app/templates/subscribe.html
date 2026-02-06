@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Subscribe{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Welcome Subscriber</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="{% url 'subscribe' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+</div>
+{% endblock content %}
